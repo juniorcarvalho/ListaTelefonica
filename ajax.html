@@ -6,11 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Ajax - Experience!</title>
+    <script type="text/javascript">
+         get = function(url, callback) {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    callback(xhr.responseText, xhr.status);
+                }
+            };
+            xhr.open('GET', url);
+            xhr.send(null);
+        };
+
+        get("http://127.0.0.1:8000/contato/?format=json", function (data){
+          document.getElementById('contatos').innerHTML = data;
+        });
+
+        get("http://127.0.0.1:8000/operadora/?format=json", function (data){
+          document.getElementById('operadoras').innerHTML = data;
+        });
+
+    </script>
 </head>
 
 <body>
     <h3>AJAX - Experience!</h3>
-    <div id="ajax"></div>
+    <div id="contatos"></div>
+    <hr/>
+    <div id="operadoras"></div>
 </body>
 
 </html>
