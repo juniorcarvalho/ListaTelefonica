@@ -18,11 +18,11 @@
             xhr.send(null);
         };
 
-        get("http://127.0.0.1:8000/contato/?format=json", function (data){
+        get("http://127.0.0.1:8000/contato/", function (data){
           document.getElementById('contatos').innerHTML = data;
         });
 
-        get("http://127.0.0.1:8000/operadora/?format=json", function (data){
+        get("http://127.0.0.1:8000/operadora/", function (data){
           document.getElementById('operadoras').innerHTML = data;
         });
 
