@@ -26,10 +26,14 @@ angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function($sc
     $scope.adicionarContato = function(contato) {
 
         contato.data = new Date();
-        $http.post("https://listatelefonica-teste.herokuapp.com/contato/", contato).success(function(data) {
+        $http.post("https://listatelefonica-teste.herokuapp.com/contato/", contato).then(function(data) {
             delete $scope.contato;
             $scope.contatoForm.$setPristine();
             carregarContatos();
+        }).catch(function(response) {
+            $scope.message = "Aconteceu um problema: " + response;
+        }).finally(function() {
+            console.log('carregou operadoras');
         });
     };
 
