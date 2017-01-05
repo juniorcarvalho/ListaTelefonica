@@ -4,7 +4,7 @@ angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function($sc
     // $scope.operadoras = [];
 
     var carregarContatos = function() {
-        $http.get("http://127.0.0.1:8000/contato/").then(function(data) {
+        $http.get("https://listatelefonica-teste.herokuapp.com/contato/").then(function(data) {
             $scope.contatos = data;
         }).catch(function(response) {
             $scope.message = "Aconteceu um problema: " + response;
@@ -14,7 +14,7 @@ angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function($sc
     };
 
     var carregarOperadoras = function() {
-        $http.get("http://127.0.0.1:8000/operadora/").then(function(data) {
+        $http.get("https://listatelefonica-teste.herokuapp.com/operadora/").then(function(data) {
             $scope.operadoras = data;
         }).catch(function(response) {
             $scope.message = "Aconteceu um problema: " + response;
@@ -26,7 +26,7 @@ angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function($sc
     $scope.adicionarContato = function(contato) {
 
         contato.data = new Date();
-        $http.post("http://127.0.0.1:8000/operadora/", contato).success(function(data) {
+        $http.post("https://listatelefonica-teste.herokuapp.com/contato/", contato).success(function(data) {
             delete $scope.contato;
             $scope.contatoForm.$setPristine();
             carregarContatos();
