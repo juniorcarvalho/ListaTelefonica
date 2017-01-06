@@ -31,11 +31,14 @@ angular.module("listaTelefonica").controller("listaTelefonicaCtrl",
 
         $scope.adicionarContato = function(contato) {
             $scope.serial = serialGenerator.generate();
-            contato.data = new Date();
+            contato.data = new Date().toISOString().slice(0, 10);
+
+            // console.log(contato);
+
             contatosAPI.saveContato(contato).then(function(data) {
                 delete $scope.contato;
                 $scope.contatoForm.$setPristine();
-                console.log('gravou contato');
+                // console.log('gravou contato');
                 carregarContatos();
             }).catch(function(response) {
                 $scope.message = "Aconteceu um problema: " + response;
