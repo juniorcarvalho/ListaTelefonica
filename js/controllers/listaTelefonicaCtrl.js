@@ -10,7 +10,7 @@ angular.module("listaTelefonica").controller("listaTelefonicaCtrl",
                 $scope.contatos = data.data;
                 console.log('carregou contatos');
             }).catch(function(response) {
-                $scope.message = "Aconteceu um problema: " + response;
+                $scope.error = "Não foi possível carregar os dados.";
                 console.log(response);
             }).finally(function() {
 
@@ -22,7 +22,7 @@ angular.module("listaTelefonica").controller("listaTelefonicaCtrl",
                 $scope.operadoras = data.data;
                 console.log('carregou operadoras');
             }).catch(function(response) {
-                $scope.message = "Aconteceu um problema: " + response;
+                $scope.error = "Não foi possível carregar os dados.";
                 console.log(response);
             }).finally(function() {
 
@@ -41,7 +41,7 @@ angular.module("listaTelefonica").controller("listaTelefonicaCtrl",
                 // console.log('gravou contato');
                 carregarContatos();
             }).catch(function(response) {
-                $scope.message = "Aconteceu um problema: " + response;
+                $scope.error = "Aconteceu um problema: " + response;
                 console.log(response)
             }).finally(function() {
 
@@ -50,8 +50,15 @@ angular.module("listaTelefonica").controller("listaTelefonicaCtrl",
 
         $scope.apagarContatos = function(contatos) {
             $scope.contatos = contatos.filter(function(contato) {
-                if (!contato.selecionado) return contato;
-            })
+                if (contato.selecionado) {
+                    contatosAPI.deleteContato(contato).catch(function(response) {
+                        $scope.error = "Aconteceu um problema: " + response;
+                        console.log(response)
+                    });
+                } else {
+                    return contato;
+                }
+            });
         };
 
         $scope.isContatoSelecionado = function(contatos) {
