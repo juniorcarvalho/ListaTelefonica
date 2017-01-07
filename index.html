@@ -19,6 +19,7 @@
     <script src="js/value/configValue.js"></script>
     <script src="js/config/serialGeneratorConfig.js"></script>
     <script src="js/directives/uiAlertDirective.js"></script>
+    <script src="js/directives/uiDateDirective.js"></script>
 </head>
 
 <body ng-controller="listaTelefonicaCtrl">
@@ -49,6 +50,8 @@
         <form name="contatoForm">
             <input class="form-control" type="text" ng-model="contato.nome" name="nome" placeholder="Nome" ng-required="true" ng-minlength="10" />
             <input class="form-control" type="text" ng-model="contato.telefone" name="telefone" placeholder="Telefone" ng-required="true" ng-pattern="/^\d{4,5}-\d{4}$/" />
+            {{contato.data}}
+            <input class="form-control" type="text" ng-model="contato.data" name="data" placeholder="Data" ui-date />
             <select class="form-control" ng-model="contato.operadora" ng-options="operadora.nome + ' ( ' + (operadora.preco | currency) + ' )' for operadora in operadoras|orderBy:'nome'" ng-value="operadora.id">
 				      <option value="">Selecione uma operadora</option>
 			      </select>
